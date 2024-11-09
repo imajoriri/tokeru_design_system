@@ -1,7 +1,4 @@
 library tokeru_url_preview;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/url_preview.dart';
+export 'src/url_future_builder.dart';

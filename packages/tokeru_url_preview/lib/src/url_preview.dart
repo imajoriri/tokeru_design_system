@@ -3,8 +3,8 @@ import 'package:html/parser.dart' as html_parser;
 import 'package:html/dom.dart' as dom;
 
 /// URL preview
-class UrlPreview {
-  const UrlPreview({
+class TokeruUrlPreview {
+  const TokeruUrlPreview({
     required this.title,
     required this.description,
     required this.imageUrl,
@@ -22,7 +22,7 @@ class UrlPreview {
 final _dio = Dio();
 
 /// URL先のOGPデータを取得する。
-Future<UrlPreview> fetchUrlPreview(Uri url) async {
+Future<TokeruUrlPreview> fetchUrlPreview(Uri url) async {
   final response = await _dio.get(
     url.toString(),
     options: Options(
@@ -103,7 +103,7 @@ Future<UrlPreview> fetchUrlPreview(Uri url) async {
     }
   }
 
-  return UrlPreview(
+  return TokeruUrlPreview(
     title: title,
     description: description,
     imageUrl: imageUrl,
