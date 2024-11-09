@@ -1,0 +1,4 @@
+name: tokeru_design_system
+
+packages:
+  - packages/**
