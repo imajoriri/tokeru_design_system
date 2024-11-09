@@ -248,13 +248,13 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "my_project",
+      "name": "tokeru_design_system",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-11-09T06:14:35.339760Z",
+  "generated": "2024-11-09T06:51:54.208586Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }

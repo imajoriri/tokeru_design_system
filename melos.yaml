@@ -1,4 +1,6 @@
 name: tokeru_design_system
 
+sdkPath: .fvm/flutter_sdk
+
 packages:
   - packages/**
