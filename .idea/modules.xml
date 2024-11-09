@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/packages/tokeru_design/melos_tokeru_design.iml" filepath="$PROJECT_DIR$/packages/tokeru_design/melos_tokeru_design.iml" />
       <module fileurl="file://$PROJECT_DIR$/packages/tokeru_url_preview/melos_tokeru_url_preview.iml" filepath="$PROJECT_DIR$/packages/tokeru_url_preview/melos_tokeru_url_preview.iml" />
       <module fileurl="file://$PROJECT_DIR$/melos_tokeru_design_system.iml" filepath="$PROJECT_DIR$/melos_tokeru_design_system.iml" />
     </modules>
