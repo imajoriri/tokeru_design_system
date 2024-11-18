@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tokeru_design/src/theme/color_const.dart';
 import 'package:tokeru_design/src/theme/color_theme.dart';
+import 'package:tokeru_design/src/theme/shadow_theme.dart';
 import 'package:tokeru_design/src/theme/spacing_theme.dart';
 import 'package:tokeru_design/src/theme/text_theme.dart';
 
@@ -25,6 +27,80 @@ class TokeruTheme {
     );
   }();
 
+  static final shadow = () {
+    return TokeruShadowExtension(
+      w100: [
+        BoxShadow(
+          offset: const Offset(0, 1),
+          blurRadius: 4,
+          color: TokeruPrimitiveColors.black.shade50,
+        ),
+      ],
+      w200: [
+        BoxShadow(
+          offset: const Offset(0, 1),
+          blurRadius: 4,
+          color: TokeruPrimitiveColors.black.shade100,
+        ),
+        BoxShadow(
+          offset: const Offset(0, 1),
+          blurRadius: 4,
+          color: TokeruPrimitiveColors.black.shade50,
+        ),
+      ],
+      w300: [
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 4,
+          spreadRadius: -1,
+          color: TokeruPrimitiveColors.black.shade100,
+        ),
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 4,
+          spreadRadius: -1,
+          color: TokeruPrimitiveColors.black.shade50,
+        ),
+      ],
+      w400: [
+        BoxShadow(
+          offset: const Offset(0, 16),
+          blurRadius: 32,
+          spreadRadius: -4,
+          color: TokeruPrimitiveColors.black.shade100,
+        ),
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 4,
+          spreadRadius: -4,
+          color: TokeruPrimitiveColors.black.shade50,
+        ),
+      ],
+      w500: [
+        BoxShadow(
+          offset: const Offset(0, 16),
+          blurRadius: 16,
+          spreadRadius: -8,
+          color: TokeruPrimitiveColors.black.shade100,
+        ),
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 4,
+          spreadRadius: -4,
+          color: TokeruPrimitiveColors.black.shade50,
+        ),
+      ],
+      w600: [
+        BoxShadow(
+          offset: const Offset(0, 16),
+          blurRadius: 32,
+          spreadRadius: -16,
+          color: TokeruPrimitiveColors.black.shade300,
+        ),
+      ],
+    );
+  }();
+
   static final color = () {
     return TokeruColorsExtension(
       primary: Colors.cyan.shade500,
@@ -37,6 +113,44 @@ class TokeruTheme {
       outlineStrong: Colors.grey.shade400,
       link: Colors.blue.shade800,
       skeleton: Colors.grey.shade300,
+    );
+  }();
+
+  static final text = () {
+    return const TokeruTextThemeExtension(
+      displayLarge: TextStyle(fontSize: 57),
+      displayMedium: TextStyle(fontSize: 45),
+      displaySmall: TextStyle(fontSize: 36),
+      headlineLarge: TextStyle(fontSize: 32),
+      headlineMedium: TextStyle(fontSize: 28),
+      headlineSmall: TextStyle(fontSize: 24),
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      ),
+      bodyLarge: TextStyle(fontSize: 16),
+      bodyMedium: TextStyle(fontSize: 14),
+      bodySmall: TextStyle(fontSize: 12),
+      labelLarge: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+      labelMidium: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 11,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }();
 
@@ -53,41 +167,8 @@ class TokeruTheme {
       extensions: [
         colorExt,
         spacing,
-        const TokeruTextThemeExtension(
-          displayLarge: TextStyle(fontSize: 57),
-          displayMedium: TextStyle(fontSize: 45),
-          displaySmall: TextStyle(fontSize: 36),
-          headlineLarge: TextStyle(fontSize: 32),
-          headlineMedium: TextStyle(fontSize: 28),
-          headlineSmall: TextStyle(fontSize: 24),
-          titleLarge: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
-          titleMedium: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-          titleSmall: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-          bodyLarge: TextStyle(fontSize: 16),
-          bodyMedium: TextStyle(fontSize: 14),
-          bodySmall: TextStyle(fontSize: 12),
-          labelLarge: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-          labelMidium: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-          labelSmall: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        shadow,
+        text,
       ],
     );
   }();
@@ -101,41 +182,8 @@ class TokeruTheme {
       extensions: [
         colorExt,
         spacing,
-        const TokeruTextThemeExtension(
-          displayLarge: TextStyle(fontSize: 57),
-          displayMedium: TextStyle(fontSize: 45),
-          displaySmall: TextStyle(fontSize: 36),
-          headlineLarge: TextStyle(fontSize: 32),
-          headlineMedium: TextStyle(fontSize: 28),
-          headlineSmall: TextStyle(fontSize: 24),
-          titleLarge: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
-          titleMedium: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-          titleSmall: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-          bodyLarge: TextStyle(fontSize: 16),
-          bodyMedium: TextStyle(fontSize: 14),
-          bodySmall: TextStyle(fontSize: 12),
-          labelLarge: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-          labelMidium: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-          labelSmall: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        shadow,
+        text,
       ],
     );
   }();
