@@ -201,4 +201,8 @@ extension TokeruThemeExtension on BuildContext {
   TokeruSpacingExtension get tokeruSpacing {
     return Theme.of(this).extension<TokeruSpacingExtension>()!;
   }
+
+  TokeruShadowExtension get tokeruShadow {
+    return Theme.of(this).extension<TokeruShadowExtension>()!;
+  }
 }
