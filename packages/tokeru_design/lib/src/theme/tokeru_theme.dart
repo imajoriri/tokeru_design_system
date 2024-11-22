@@ -105,6 +105,8 @@ class TokeruTheme {
     return TokeruColorsExtension(
       primary: Colors.cyan.shade500,
       onPrimary: Colors.white,
+      secondary: TokeruPrimitiveColors.grey.shade200,
+      onSecondary: TokeruPrimitiveColors.grey.shade400,
       surface: Colors.white,
       onSurface: Colors.grey.shade900,
       onSurfaceSubtle: Colors.grey.shade600,
@@ -113,6 +115,7 @@ class TokeruTheme {
       outlineStrong: Colors.grey.shade400,
       link: Colors.blue.shade800,
       skeleton: Colors.grey.shade300,
+      background: TokeruPrimitiveColors.grey.shade100,
     );
   }();
 
