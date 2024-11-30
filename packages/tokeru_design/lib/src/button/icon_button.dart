@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tokeru_design/src/button/base_button.dart';
-import 'package:tokeru_design/src/theme/tokeru_theme.dart';
 
 enum TokeruIconButtonShape {
   /// 丸型
@@ -39,8 +38,8 @@ class TokeruIconButton extends StatefulWidget {
   /// ボタンの形状。
   final TokeruIconButtonShape shape;
 
-  /// Borderを表示するかどうか。
-  final bool showBorder;
+  /// Borderの色。
+  final Color? borderColor;
 
   const TokeruIconButton.large({
     super.key,
@@ -48,10 +47,10 @@ class TokeruIconButton extends StatefulWidget {
     this.style,
     this.onPressed,
     this.tooltip,
-    this.showBorder = false,
+    this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
-  })  : iconSize = 36,
+  })  : iconSize = 28,
         size = const Size(56, 56),
         padding = const EdgeInsets.all(8);
 
@@ -61,7 +60,7 @@ class TokeruIconButton extends StatefulWidget {
     this.style,
     this.onPressed,
     this.tooltip,
-    this.showBorder = false,
+    this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
   })  : iconSize = 20,
@@ -74,7 +73,7 @@ class TokeruIconButton extends StatefulWidget {
     this.style,
     this.onPressed,
     this.tooltip,
-    this.showBorder = false,
+    this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
   })  : iconSize = 16,
@@ -95,9 +94,9 @@ class _AppIconButtonState extends State<TokeruIconButton> {
         child: TokeruDefaultIconButtonStyle.merge(
           style: TokeruButtonStyle(
             shape: RoundedRectangleBorder(
-              side: widget.showBorder
+              side: widget.borderColor != null
                   ? BorderSide(
-                      color: context.tokeruColors.onPrimary,
+                      color: widget.borderColor!,
                     )
                   : BorderSide.none,
               borderRadius: BorderRadius.all(
