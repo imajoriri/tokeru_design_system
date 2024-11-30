@@ -25,26 +25,6 @@ class TokeruButtonStyle {
   /// ボタンの背景色。
   final Color? backgroundColor;
 
-  /// ホバー時のカラー。
-  ///
-  /// nullの場合、[_ButtonStatusColor.hovered]が使用される。
-  final Color? hoveredColor;
-
-  /// フォーカス時のカラー。
-  ///
-  /// nullの場合、[_ButtonStatusColor.focused]が使用される。
-  final Color? focusedColor;
-
-  /// プレス時のカラー。
-  ///
-  /// nullの場合、[_ButtonStatusColor.pressed]が使用される。
-  final Color? pressedColor;
-
-  /// Disabled時のカラー。
-  ///
-  /// nullの場合、[_ButtonStatusColor.disabled]が使用される。
-  final Color? disabledColor;
-
   /// ボタンを押した時などのステート変更時にアニメーションするかどうか。
   final bool stateColorAnimated;
 
@@ -57,10 +37,6 @@ class TokeruButtonStyle {
   const TokeruButtonStyle({
     this.contentColor,
     this.backgroundColor,
-    this.hoveredColor,
-    this.focusedColor,
-    this.pressedColor,
-    this.disabledColor,
     this.stateColorAnimated = true,
     this.backgroundColorAnimated = true,
     this.shape,
@@ -73,10 +49,6 @@ class TokeruButtonStyle {
     return copyWith(
       contentColor: other.contentColor,
       backgroundColor: other.backgroundColor,
-      hoveredColor: other.hoveredColor,
-      focusedColor: other.focusedColor,
-      pressedColor: other.pressedColor,
-      disabledColor: other.disabledColor,
       stateColorAnimated: other.stateColorAnimated,
       backgroundColorAnimated: other.backgroundColorAnimated,
       shape: other.shape,
@@ -97,10 +69,6 @@ class TokeruButtonStyle {
       TokeruButtonStyle(
         contentColor: contentColor ?? this.contentColor,
         backgroundColor: backgroundColor ?? this.backgroundColor,
-        hoveredColor: hoveredColor ?? this.hoveredColor,
-        focusedColor: focusedColor ?? this.focusedColor,
-        pressedColor: pressedColor ?? this.pressedColor,
-        disabledColor: disabledColor ?? this.disabledColor,
         stateColorAnimated: stateColorAnimated ?? this.stateColorAnimated,
         backgroundColorAnimated:
             backgroundColorAnimated ?? this.backgroundColorAnimated,
@@ -240,20 +208,20 @@ class _TokeruButtonState extends State<TokeruButton> {
     final defaultStyle = TokeruDefaultIconButtonStyle.of(context).style;
     late final Color overlayColor;
     if (!enabled) {
-      overlayColor = widget.style?.disabledColor ??
-          defaultStyle.disabledColor ??
+      overlayColor = widget.style?.contentColor?.disabled ??
+          defaultStyle.contentColor?.disabled ??
           Colors.transparent;
     } else if (pressed) {
-      overlayColor = widget.style?.pressedColor ??
-          defaultStyle.pressedColor ??
+      overlayColor = widget.style?.contentColor?.pressed ??
+          defaultStyle.contentColor?.pressed ??
           Colors.transparent;
     } else if (hover) {
-      overlayColor = widget.style?.hoveredColor ??
-          defaultStyle.hoveredColor ??
+      overlayColor = widget.style?.contentColor?.hovered ??
+          defaultStyle.contentColor?.hovered ??
           Colors.transparent;
     } else if (focus) {
-      overlayColor = widget.style?.focusedColor ??
-          defaultStyle.focusedColor ??
+      overlayColor = widget.style?.contentColor?.focused ??
+          defaultStyle.contentColor?.focused ??
           Colors.transparent;
     } else {
       overlayColor =
