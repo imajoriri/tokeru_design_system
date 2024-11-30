@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tokeru_design/src/button/base_button.dart';
 import 'package:tokeru_design/src/theme/tokeru_theme.dart';
 
+enum TokeruIconButtonShape {
+  /// 丸型
+  circle,
+
+  /// 角丸型
+  square,
+}
+
 /// 小さめのアイコンボタン。
 class TokeruIconButton extends StatefulWidget {
   /// アイコンのWidget。
@@ -13,42 +21,65 @@ class TokeruIconButton extends StatefulWidget {
   /// ツールチップ。
   final String? tooltip;
 
-  /// アイコンのサイズ。
-  final double iconSize;
-
   /// アイコンの色。
   final Color? iconColor;
 
   /// パディング。
   final EdgeInsets padding;
 
-  /// ボタンの角の丸み。
-  final double radius;
+  /// ボタンのスタイル。
+  final TokeruButtonStyle? style;
+
+  /// ボタンのサイズ。
+  final Size size;
+
+  /// アイコンのサイズ。
+  final double iconSize;
+
+  /// ボタンの形状。
+  final TokeruIconButtonShape shape;
 
   /// Borderを表示するかどうか。
   final bool showBorder;
 
-  const TokeruIconButton.medium({
+  const TokeruIconButton.large({
     super.key,
     required this.icon,
+    this.style,
     this.onPressed,
     this.tooltip,
     this.showBorder = false,
     this.iconColor,
+    this.shape = TokeruIconButtonShape.square,
+  })  : iconSize = 36,
+        size = const Size(56, 56),
+        padding = const EdgeInsets.all(8);
+
+  const TokeruIconButton.medium({
+    super.key,
+    required this.icon,
+    this.style,
+    this.onPressed,
+    this.tooltip,
+    this.showBorder = false,
+    this.iconColor,
+    this.shape = TokeruIconButtonShape.square,
   })  : iconSize = 20,
-        padding = const EdgeInsets.all(8),
-        radius = 8;
+        size = const Size(44, 44),
+        padding = const EdgeInsets.all(8);
 
   const TokeruIconButton.small({
     super.key,
     required this.icon,
+    this.style,
     this.onPressed,
     this.tooltip,
     this.showBorder = false,
     this.iconColor,
+    this.shape = TokeruIconButtonShape.square,
   })  : iconSize = 16,
-        padding = const EdgeInsets.all(4),
-        radius = 8;
+        size = const Size(32, 32),
+        padding = const EdgeInsets.all(4);
 
   @override
   State<TokeruIconButton> createState() => _AppIconButtonState();
@@ -59,30 +90,35 @@ class _AppIconButtonState extends State<TokeruIconButton> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: widget.tooltip ?? '',
-      child: TokeruButton(
-        style: TokeruButtonStyle(
-          contentColor: context.tokeruColors.onSurface,
-          backgroundColor: context.tokeruColors.surface.withOpacity(0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+      child: SizedBox.fromSize(
+        size: widget.size,
+        child: TokeruDefaultIconButtonStyle.merge(
+          style: TokeruButtonStyle(
+            shape: RoundedRectangleBorder(
+              side: widget.showBorder
+                  ? BorderSide(
+                      color: context.tokeruColors.onPrimary,
+                    )
+                  : BorderSide.none,
+              borderRadius: BorderRadius.all(
+                Radius.circular(
+                  widget.shape == TokeruIconButtonShape.circle ? 100 : 8,
+                ),
+              ),
+            ),
           ),
-        ),
-        onPressed: widget.onPressed,
-        child: Container(
-          padding: widget.padding,
-          decoration: widget.showBorder
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(widget.radius),
-                  border: Border.all(
-                    color: context.tokeruColors.outline,
-                  ),
-                )
-              : null,
-          child: IconTheme.merge(
-            child: widget.icon,
-            data: IconThemeData(
-              size: widget.iconSize,
-              color: widget.iconColor ?? context.tokeruColors.onSurface,
+          child: TokeruButton(
+            onPressed: widget.onPressed,
+            style: widget.style,
+            child: Container(
+              padding: widget.padding,
+              alignment: Alignment.center,
+              child: IconTheme.merge(
+                data: IconThemeData(
+                  size: widget.iconSize,
+                ),
+                child: widget.icon,
+              ),
             ),
           ),
         ),

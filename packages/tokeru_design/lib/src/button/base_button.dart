@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tokeru_design/tokeru_design.dart';
 
 extension _ButtonStatusColor on Color {
   /// ホバー時のカラーを返すメソッド。
@@ -19,10 +20,10 @@ class TokeruButtonStyle {
   ///
   /// [IconTheme]、[DefaultTextStyle]を使用してコンテンツのカラーとして使用される。
   /// ホバーやフォーカス時のカラーは、このカラーを元に計算される。
-  final Color contentColor;
+  final Color? contentColor;
 
   /// ボタンの背景色。
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// ホバー時のカラー。
   ///
@@ -44,28 +45,136 @@ class TokeruButtonStyle {
   /// nullの場合、[_ButtonStatusColor.disabled]が使用される。
   final Color? disabledColor;
 
-  /// ボタンのカラーが変更時にアニメーションするかどうか。
+  /// ボタンを押した時などのステート変更時にアニメーションするかどうか。
   final bool stateColorAnimated;
 
-  /// ボタンの背景色のカラーが変更時にアニメーションするかどうか。
+  /// [backgroundColor]が変更時にアニメーションするかどうか。
   final bool backgroundColorAnimated;
 
   /// ボタンの形状。
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   const TokeruButtonStyle({
-    required this.contentColor,
-    required this.backgroundColor,
+    this.contentColor,
+    this.backgroundColor,
     this.hoveredColor,
     this.focusedColor,
     this.pressedColor,
     this.disabledColor,
     this.stateColorAnimated = true,
     this.backgroundColorAnimated = true,
-    this.shape = const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-    ),
+    this.shape,
   });
+
+  TokeruButtonStyle merge(TokeruButtonStyle? other) {
+    if (other == null) {
+      return this;
+    }
+    return copyWith(
+      contentColor: other.contentColor,
+      backgroundColor: other.backgroundColor,
+      hoveredColor: other.hoveredColor,
+      focusedColor: other.focusedColor,
+      pressedColor: other.pressedColor,
+      disabledColor: other.disabledColor,
+      stateColorAnimated: other.stateColorAnimated,
+      backgroundColorAnimated: other.backgroundColorAnimated,
+      shape: other.shape,
+    );
+  }
+
+  TokeruButtonStyle copyWith({
+    Color? contentColor,
+    Color? backgroundColor,
+    Color? hoveredColor,
+    Color? focusedColor,
+    Color? pressedColor,
+    Color? disabledColor,
+    bool? stateColorAnimated,
+    bool? backgroundColorAnimated,
+    ShapeBorder? shape,
+  }) =>
+      TokeruButtonStyle(
+        contentColor: contentColor ?? this.contentColor,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        hoveredColor: hoveredColor ?? this.hoveredColor,
+        focusedColor: focusedColor ?? this.focusedColor,
+        pressedColor: pressedColor ?? this.pressedColor,
+        disabledColor: disabledColor ?? this.disabledColor,
+        stateColorAnimated: stateColorAnimated ?? this.stateColorAnimated,
+        backgroundColorAnimated:
+            backgroundColorAnimated ?? this.backgroundColorAnimated,
+        shape: shape ?? this.shape,
+      );
+
+  /// defaultなボタンのスタイル。
+  static TokeruButtonStyle defaultStyle(BuildContext context) =>
+      TokeruButtonStyle(
+        contentColor: context.tokeruColors.onPrimary,
+        backgroundColor: context.tokeruColors.primary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+      );
+
+  /// Primaryなボタンのスタイル。
+  static TokeruButtonStyle primary(BuildContext context) => TokeruButtonStyle(
+        contentColor: context.tokeruColors.onPrimary,
+        backgroundColor: context.tokeruColors.primary,
+      );
+
+  /// Secondaryなボタンのスタイル。
+  static TokeruButtonStyle secondary(BuildContext context) => TokeruButtonStyle(
+        contentColor: context.tokeruColors.onSecondary,
+        backgroundColor: context.tokeruColors.secondary,
+      );
+}
+
+class TokeruDefaultIconButtonStyle extends InheritedTheme {
+  final TokeruButtonStyle style;
+  const TokeruDefaultIconButtonStyle({
+    super.key,
+    required this.style,
+    required super.child,
+  });
+
+  /// 親の[TokeruDefaultIconButtonStyle]を取得する。
+  ///
+  /// 取得できない場合は、[TokeruButtonStyle.primary]を使用した[TokeruDefaultIconButtonStyle]を返す。
+  static TokeruDefaultIconButtonStyle of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<
+            TokeruDefaultIconButtonStyle>() ??
+        TokeruDefaultIconButtonStyle(
+          style: TokeruButtonStyle.defaultStyle(context),
+          child: const SizedBox.shrink(),
+        );
+  }
+
+  static Widget merge({
+    required Widget child,
+    TokeruButtonStyle? style,
+  }) {
+    return Builder(builder: (context) {
+      final currentStyle = TokeruDefaultIconButtonStyle.of(context).style;
+      return TokeruDefaultIconButtonStyle(
+        style: currentStyle.merge(style),
+        child: child,
+      );
+    });
+  }
+
+  @override
+  bool updateShouldNotify(TokeruDefaultIconButtonStyle oldWidget) {
+    return style != oldWidget.style;
+  }
+
+  @override
+  Widget wrap(BuildContext context, Widget child) {
+    return TokeruDefaultIconButtonStyle(
+      style: style,
+      child: child,
+    );
+  }
 }
 
 /// ボタンとしての基本的な機能を持つWidget
@@ -75,16 +184,16 @@ class TokeruButtonStyle {
 class TokeruButton extends StatefulWidget {
   const TokeruButton({
     super.key,
-    required this.style,
     required this.child,
+    this.style,
     this.onPressed,
     this.onLongPress,
     this.skipTraversal = false,
   }) : bounce = onLongPress != null;
 
-  final TokeruButtonStyle style;
-
   final Widget child;
+
+  final TokeruButtonStyle? style;
 
   /// ボタンが押された時のコールバック。
   final void Function()? onPressed;
@@ -128,34 +237,47 @@ class _TokeruButtonState extends State<TokeruButton> {
   }
 
   Color get overlayColor {
+    final defaultStyle = TokeruDefaultIconButtonStyle.of(context).style;
     late final Color overlayColor;
     if (!enabled) {
-      overlayColor =
-          widget.style.disabledColor ?? widget.style.contentColor.disabled;
+      overlayColor = widget.style?.disabledColor ??
+          defaultStyle.disabledColor ??
+          Colors.transparent;
     } else if (pressed) {
-      overlayColor =
-          widget.style.pressedColor ?? widget.style.contentColor.pressed;
+      overlayColor = widget.style?.pressedColor ??
+          defaultStyle.pressedColor ??
+          Colors.transparent;
     } else if (hover) {
-      overlayColor =
-          widget.style.hoveredColor ?? widget.style.contentColor.hovered;
+      overlayColor = widget.style?.hoveredColor ??
+          defaultStyle.hoveredColor ??
+          Colors.transparent;
     } else if (focus) {
-      overlayColor =
-          widget.style.focusedColor ?? widget.style.contentColor.focused;
+      overlayColor = widget.style?.focusedColor ??
+          defaultStyle.focusedColor ??
+          Colors.transparent;
     } else {
-      overlayColor = widget.style.backgroundColor.withOpacity(0);
+      overlayColor =
+          widget.style?.backgroundColor?.withOpacity(0) ?? Colors.transparent;
     }
     return overlayColor;
   }
 
   @override
   Widget build(BuildContext context) {
-    // ボタンの背景色のアニメーション時間。
-    final backgroundColorDuration =
-        Duration(milliseconds: widget.style.backgroundColorAnimated ? 150 : 0);
+    final style = TokeruDefaultIconButtonStyle.of(context).style;
+    final backgroundColorAnimated =
+        widget.style?.backgroundColorAnimated ?? style.backgroundColorAnimated;
+    final stateColorAnimated =
+        widget.style?.stateColorAnimated ?? style.stateColorAnimated;
+    final backgroundColor =
+        widget.style?.backgroundColor ?? style.backgroundColor;
+    final shape = widget.style?.shape ?? style.shape!;
+    final contentColor = widget.style?.contentColor ?? style.contentColor;
 
-    // ボタンのステートによるカラー変更のアニメーション時間。
+    final backgroundColorDuration =
+        Duration(milliseconds: backgroundColorAnimated ? 10 : 0);
     final stateColorduration =
-        Duration(milliseconds: widget.style.stateColorAnimated ? 150 : 0);
+        Duration(milliseconds: stateColorAnimated ? 100 : 0);
 
     // ボタンのbounceアニメーション時間。
     const bounceDuration = Duration(milliseconds: 200);
@@ -203,8 +325,8 @@ class _TokeruButtonState extends State<TokeruButton> {
                   child: AnimatedContainer(
                     duration: backgroundColorDuration,
                     decoration: ShapeDecoration(
-                      color: widget.style.backgroundColor,
-                      shape: widget.style.shape,
+                      color: backgroundColor,
+                      shape: shape,
                     ),
                   ),
                 ),
@@ -217,21 +339,19 @@ class _TokeruButtonState extends State<TokeruButton> {
                   bottom: 0,
                   child: AnimatedContainer(
                     duration: stateColorduration,
-                    decoration: ShapeDecoration(
-                      color: overlayColor,
-                      shape: widget.style.shape,
-                    ),
+                    decoration:
+                        ShapeDecoration(color: overlayColor, shape: shape),
                   ),
                 ),
 
                 // Content layer
                 IconTheme.merge(
                   data: IconThemeData(
-                    color: widget.style.contentColor,
+                    color: contentColor,
                   ),
                   child: DefaultTextStyle.merge(
                     style: TextStyle(
-                      color: widget.style.contentColor,
+                      color: contentColor,
                     ),
                     child: widget.child,
                   ),
