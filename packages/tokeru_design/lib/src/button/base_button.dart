@@ -34,12 +34,16 @@ class TokeruButtonStyle {
   /// ボタンの形状。
   final ShapeBorder? shape;
 
+  /// ボタンの影。
+  final List<BoxShadow>? shadows;
+
   const TokeruButtonStyle({
     this.contentColor,
     this.backgroundColor,
     this.stateColorAnimated = true,
     this.backgroundColorAnimated = true,
     this.shape,
+    this.shadows,
   });
 
   TokeruButtonStyle merge(TokeruButtonStyle? other) {
@@ -52,6 +56,7 @@ class TokeruButtonStyle {
       stateColorAnimated: other.stateColorAnimated,
       backgroundColorAnimated: other.backgroundColorAnimated,
       shape: other.shape,
+      shadows: other.shadows,
     );
   }
 
@@ -65,6 +70,7 @@ class TokeruButtonStyle {
     bool? stateColorAnimated,
     bool? backgroundColorAnimated,
     ShapeBorder? shape,
+    List<BoxShadow>? shadows,
   }) =>
       TokeruButtonStyle(
         contentColor: contentColor ?? this.contentColor,
@@ -73,6 +79,7 @@ class TokeruButtonStyle {
         backgroundColorAnimated:
             backgroundColorAnimated ?? this.backgroundColorAnimated,
         shape: shape ?? this.shape,
+        shadows: shadows ?? this.shadows,
       );
 
   /// defaultなボタンのスタイル。
@@ -241,7 +248,7 @@ class _TokeruButtonState extends State<TokeruButton> {
         widget.style?.backgroundColor ?? style.backgroundColor;
     final shape = widget.style?.shape ?? style.shape!;
     final contentColor = widget.style?.contentColor ?? style.contentColor;
-
+    final shadows = widget.style?.shadows ?? style.shadows;
     final backgroundColorDuration =
         Duration(milliseconds: backgroundColorAnimated ? 10 : 0);
     final stateColorduration =
@@ -295,6 +302,7 @@ class _TokeruButtonState extends State<TokeruButton> {
                     decoration: ShapeDecoration(
                       color: backgroundColor,
                       shape: shape,
+                      shadows: shadows,
                     ),
                   ),
                 ),
