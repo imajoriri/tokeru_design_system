@@ -40,7 +40,7 @@ class _TokeruScaleInState extends State<TokeruScaleIn>
     Future.delayed(widget.delay, () {
       final spring = SpringDescription.withDampingRatio(
         mass: 1.0,
-        stiffness: 120,
+        stiffness: 300,
         ratio: 0.8,
       );
       final springSimulation = SpringSimulation(
