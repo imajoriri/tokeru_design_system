@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 
 import 'tokeru_haptics_platform_interface.dart';
 
-const double heavy = 1;
-const double medium = 0.6;
-const double light = 0.3;
+const double _heavy = 1;
+const double _medium = 0.6;
+const double _light = 0.3;
 
-const double rigid = 0.8;
-const double soft = 0.2;
+const double _rigid = 0.8;
+const double _soft = 0.2;
 
 class TokeruHaptics {
   Future<String?> getPlatformVersion() {
@@ -16,69 +16,81 @@ class TokeruHaptics {
   }
 
   static Future<void> rigidHeavy() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      HapticFeedback.heavyImpact();
-    }
     return vibrate(
-      sharpness: rigid,
-      intensity: heavy,
+      sharpness: _rigid,
+      intensity: _heavy,
     );
   }
 
   static Future<void> rigidMedium() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      HapticFeedback.mediumImpact();
-    }
     return vibrate(
-      sharpness: rigid,
-      intensity: medium,
+      sharpness: _rigid,
+      intensity: _medium,
     );
   }
 
   static Future<void> rigidLight() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      HapticFeedback.lightImpact();
-    }
     return vibrate(
-      sharpness: rigid,
-      intensity: light,
+      sharpness: _rigid,
+      intensity: _light,
     );
   }
 
   static Future<void> softHeavy() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      HapticFeedback.heavyImpact();
-    }
     return vibrate(
-      sharpness: soft,
-      intensity: heavy,
+      sharpness: _soft,
+      intensity: _heavy,
     );
   }
 
   static Future<void> softMedium() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      HapticFeedback.mediumImpact();
-    }
     return vibrate(
-      sharpness: soft,
-      intensity: medium,
+      sharpness: _soft,
+      intensity: _medium,
     );
   }
 
   static Future<void> softLight() async {
+    return vibrate(
+      sharpness: _soft,
+      intensity: _light,
+    );
+  }
+
+  static Future<void> success() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       HapticFeedback.lightImpact();
     }
-    return vibrate(
-      sharpness: soft,
-      intensity: light,
-    );
+    return TokeruHapticsPlatform.instance.success();
+  }
+
+  static Future<void> warning() async {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      HapticFeedback.mediumImpact();
+    }
+    return TokeruHapticsPlatform.instance.warning();
+  }
+
+  static Future<void> error() async {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      HapticFeedback.heavyImpact();
+    }
+    return TokeruHapticsPlatform.instance.error();
   }
 
   static Future<void> vibrate({
     required double sharpness,
     required double intensity,
   }) async {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      if (intensity <= _light) {
+        HapticFeedback.lightImpact();
+      } else if (intensity >= _heavy) {
+        HapticFeedback.heavyImpact();
+      } else {
+        HapticFeedback.mediumImpact();
+      }
+    }
     return TokeruHapticsPlatform.instance.vibrate(
       sharpness: sharpness,
       intensity: intensity,

@@ -33,4 +33,16 @@ abstract class TokeruHapticsPlatform extends PlatformInterface {
   }) async {
     throw UnimplementedError('vibrate() has not been implemented.');
   }
+
+  Future<void> success() async {
+    throw UnimplementedError('success() has not been implemented.');
+  }
+
+  Future<void> warning() async {
+    throw UnimplementedError('warning() has not been implemented.');
+  }
+
+  Future<void> error() async {
+    throw UnimplementedError('error() has not been implemented.');
+  }
 }

@@ -138,6 +138,11 @@ public class TokeruHapticsPlugin: NSObject, FlutterPlugin {
     }
   }
 
+  private func notification(type: UINotificationFeedbackGenerator.FeedbackType, result: @escaping FlutterResult) {
+    UINotificationFeedbackGenerator().notificationOccurred(type)
+    result(nil)
+  }
+
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
     case "getPlatformVersion":
@@ -147,6 +152,12 @@ public class TokeruHapticsPlugin: NSObject, FlutterPlugin {
       let intensity = arg?["intensity"] as? NSNumber ?? 1.0
       let sharpness = arg?["sharpness"] as? NSNumber ?? 1.0
       playHapticFeedback(sharpness: Float(truncating: sharpness), intensity: Float(truncating: intensity))
+    case "success":
+      notification(type: .success, result: result)
+    case "warning":
+      notification(type: .warning, result: result)
+    case "error":
+      notification(type: .error, result: result)
     default:
       result(FlutterMethodNotImplemented)
     }

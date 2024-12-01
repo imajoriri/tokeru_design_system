@@ -29,4 +29,19 @@ class MethodChannelTokeruHaptics extends TokeruHapticsPlatform {
       },
     );
   }
+
+  @override
+  Future<void> success() async {
+    await methodChannel.invokeMethod<void>('success');
+  }
+
+  @override
+  Future<void> warning() async {
+    await methodChannel.invokeMethod<void>('warning');
+  }
+
+  @override
+  Future<void> error() async {
+    await methodChannel.invokeMethod<void>('error');
+  }
 }
