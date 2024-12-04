@@ -24,6 +24,7 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     required this.link,
     required this.skeleton,
     required this.background,
+    required this.onBackground,
   });
 
   // Primary
@@ -47,7 +48,13 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
   // others
   final Color link;
   final Color skeleton;
+
+  /// 背景色
   final Color background;
+
+  /// 背景色のテキストカラー
+  final Color onBackground;
+
   @override
   ThemeExtension<TokeruColorsExtension> copyWith({
     // Primary
@@ -72,6 +79,7 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     Color? link,
     Color? skeleton,
     Color? background,
+    Color? onBackground,
   }) {
     return TokeruColorsExtension(
       primary: primary ?? this.primary,
@@ -87,6 +95,7 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
       link: link ?? this.link,
       skeleton: skeleton ?? this.skeleton,
       background: background ?? this.background,
+      onBackground: onBackground ?? this.onBackground,
     );
   }
 

@@ -116,6 +116,7 @@ class TokeruTheme {
       link: Colors.blue.shade800,
       skeleton: Colors.grey.shade300,
       background: TokeruPrimitiveColors.grey.shade100,
+      onBackground: Colors.grey.shade900,
     );
   }();
 

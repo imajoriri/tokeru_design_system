@@ -98,10 +98,11 @@ class TokeruButtonStyle {
         backgroundColor: context.tokeruColors.primary,
       );
 
-  /// Secondaryなボタンのスタイル。
-  static TokeruButtonStyle secondary(BuildContext context) => TokeruButtonStyle(
-        contentColor: context.tokeruColors.onSecondary,
-        backgroundColor: context.tokeruColors.secondary,
+  /// 背景色が透明のボタンのスタイル。
+  static TokeruButtonStyle transparentBackground(BuildContext context) =>
+      TokeruButtonStyle(
+        contentColor: context.tokeruColors.onBackground,
+        backgroundColor: context.tokeruColors.background,
       );
 }
 

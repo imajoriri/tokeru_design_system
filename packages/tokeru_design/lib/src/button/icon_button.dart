@@ -76,7 +76,7 @@ class TokeruIconButton extends StatefulWidget {
     this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
-  })  : iconSize = 16,
+  })  : iconSize = 20,
         size = const Size(32, 32),
         padding = const EdgeInsets.all(4);
 
