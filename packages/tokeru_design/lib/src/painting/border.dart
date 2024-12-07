@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_corner/smooth_corner.dart';
 
 /// Corner smoothing border
 ///
@@ -17,8 +18,8 @@ import 'package:flutter/material.dart';
 ///   ),
 /// ),
 /// ```
-class TokeruSmoothRectangleBorder extends ContinuousRectangleBorder {
+class TokeruSmoothRectangleBorder extends SmoothRectangleBorder {
   /// 全ての角を[radius]で指定した半径で角を丸くする。
   TokeruSmoothRectangleBorder.circular(double radius)
-      : super(borderRadius: BorderRadius.circular(radius * 2.3529));
+      : super(borderRadius: BorderRadius.circular(radius), smoothness: 0.6);
 }

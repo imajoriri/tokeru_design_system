@@ -99,6 +99,13 @@ class TokeruButtonStyle {
       );
 
   /// 背景色が透明のボタンのスタイル。
+  static TokeruButtonStyle transparentSurface(BuildContext context) =>
+      TokeruButtonStyle(
+        contentColor: context.tokeruColors.onSurface,
+        backgroundColor: context.tokeruColors.surface,
+      );
+
+  /// 背景色が透明のボタンのスタイル。
   static TokeruButtonStyle transparentBackground(BuildContext context) =>
       TokeruButtonStyle(
         contentColor: context.tokeruColors.onBackground,

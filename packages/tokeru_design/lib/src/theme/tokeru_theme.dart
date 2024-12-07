@@ -117,6 +117,10 @@ class TokeruTheme {
       skeleton: Colors.grey.shade300,
       background: TokeruPrimitiveColors.grey.shade100,
       onBackground: Colors.grey.shade900,
+      error: TokeruPrimitiveColors.red.shade500,
+      onError: Colors.white,
+      success: TokeruPrimitiveColors.green.shade500,
+      onSuccess: Colors.white,
     );
   }();
 

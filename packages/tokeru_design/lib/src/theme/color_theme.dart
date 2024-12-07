@@ -25,6 +25,14 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     required this.skeleton,
     required this.background,
     required this.onBackground,
+
+    // error
+    required this.error,
+    required this.onError,
+
+    // success
+    required this.success,
+    required this.onSuccess,
   });
 
   // Primary
@@ -55,6 +63,14 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
   /// 背景色のテキストカラー
   final Color onBackground;
 
+  // error
+  final Color error;
+  final Color onError;
+
+  // success
+  final Color success;
+  final Color onSuccess;
+
   @override
   ThemeExtension<TokeruColorsExtension> copyWith({
     // Primary
@@ -80,6 +96,14 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     Color? skeleton,
     Color? background,
     Color? onBackground,
+
+    // error
+    Color? error,
+    Color? onError,
+
+    // success
+    Color? success,
+    Color? onSuccess,
   }) {
     return TokeruColorsExtension(
       primary: primary ?? this.primary,
@@ -96,6 +120,10 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
       skeleton: skeleton ?? this.skeleton,
       background: background ?? this.background,
       onBackground: onBackground ?? this.onBackground,
+      error: error ?? this.error,
+      onError: onError ?? this.onError,
+      success: success ?? this.success,
+      onSuccess: onSuccess ?? this.onSuccess,
     );
   }
 

@@ -34,4 +34,38 @@ abstract class TokeruPrimitiveColors {
     },
   );
   static const int _blackPrimaryValue = 0xFF0C0C0D;
+
+  static const red = MaterialColor(
+    _redPrimaryValue,
+    <int, Color>{
+      50: Color(0xFFFFF0F3),
+      100: Color(0xFFFFDBE1),
+      200: Color(0xFFFFBFC3),
+      300: Color(0xFFFF999F),
+      400: Color(0xFFFF737C),
+      500: Color(_redPrimaryValue),
+      600: Color(0xFFEB1D35),
+      700: Color(0xFFC20B2A),
+      800: Color(0xFF99001D),
+      900: Color(0xFF66000E),
+    },
+  );
+  static const int _redPrimaryValue = 0xFFFF4D58;
+
+  static const green = MaterialColor(
+    _greenPrimaryValue,
+    <int, Color>{
+      50: Color(0xFFEEFAEC),
+      100: Color(0xFFDAF2D6),
+      200: Color(0xFFC2E5BC),
+      300: Color(0xFFA9D9A1),
+      400: Color(0xFF7FC673),
+      500: Color(_greenPrimaryValue),
+      600: Color(0xFF2AA315),
+      700: Color(0xFF218011),
+      800: Color(0xFF195E0D),
+      900: Color(0xFF0F3D08),
+    },
+  );
+  static const int _greenPrimaryValue = 0xFF55B545;
 }
