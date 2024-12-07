@@ -5,6 +5,14 @@ import 'package:smooth_corner/smooth_corner.dart';
 ///
 /// 例
 ///
+/// ```
+/// Container(
+///   decoration: ShapeDecoration(
+///     shape: TokeruSmoothRectangleBorder.circular(16),
+///   ),
+/// );
+/// ```
+///
 /// ```dart
 /// ShapeDecoration(
 ///   shape: TokeruSmoothRectangleBorder.circular(_defaultBorderRadius),

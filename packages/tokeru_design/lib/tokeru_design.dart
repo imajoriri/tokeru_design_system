@@ -9,3 +9,6 @@ export 'src/button/icon_button.dart';
 export 'src/theme/tokeru_theme.dart';
 // painting
 export 'src/painting/border.dart';
+// loading
+export 'src/loading/skeleton_text.dart';
+export 'src/loading/skeleton_card.dart';
