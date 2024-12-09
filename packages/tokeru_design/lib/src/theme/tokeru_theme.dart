@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tokeru_design/src/theme/color_const.dart';
 import 'package:tokeru_design/src/theme/color_theme.dart';
@@ -171,6 +172,15 @@ class TokeruTheme {
       dividerColor: colorExt.outline,
       textTheme: defaultTheme.textTheme.copyWith(
         bodyLarge: const TextStyle(fontFamily: 'Hiragino Kaku Gothic ProN'),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorExt.surface,
+      ),
+      cupertinoOverrideTheme: CupertinoThemeData(
+        scaffoldBackgroundColor: colorExt.surface,
+        primaryColor: colorExt.primary,
+        primaryContrastingColor: colorExt.onPrimary,
+        barBackgroundColor: colorExt.background,
       ),
       extensions: [
         colorExt,
