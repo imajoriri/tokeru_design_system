@@ -28,8 +28,6 @@ class TokeruUrlFutureBuilder extends StatefulWidget {
 }
 
 class _TokeruUrlFutureBuilderState extends State<TokeruUrlFutureBuilder> {
-  final Future<TokeruUrlPreview> Function(Uri) _fetchUrlPreview =
-      fetchUrlPreview;
   _State state = _State.loading;
   TokeruUrlPreview? data;
   Object? error;
@@ -39,7 +37,7 @@ class _TokeruUrlFutureBuilderState extends State<TokeruUrlFutureBuilder> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _fetchUrlPreview(widget.url).then((value) {
+      fetchUrlPreview(widget.url).then((value) {
         setState(() {
           state = _State.data;
           data = value;
