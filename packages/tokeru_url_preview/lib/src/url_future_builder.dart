@@ -30,21 +30,45 @@ class TokeruUrlFutureBuilder extends StatefulWidget {
 class _TokeruUrlFutureBuilderState extends State<TokeruUrlFutureBuilder> {
   final Future<TokeruUrlPreview> Function(Uri) _fetchUrlPreview =
       fetchUrlPreview;
+  _State state = _State.loading;
+  TokeruUrlPreview? data;
+  Object? error;
+  StackTrace? stackTrace;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchUrlPreview(widget.url).then((value) {
+        setState(() {
+          state = _State.data;
+          data = value;
+        });
+      }).catchError((error) {
+        setState(() {
+          state = _State.error;
+          error = error;
+          stackTrace = stackTrace;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<TokeruUrlPreview>(
-      future: _fetchUrlPreview(widget.url),
-      builder: (context, snapshot) {
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: snapshot.connectionState == ConnectionState.waiting
-              ? widget.loading()
-              : snapshot.hasError
-                  ? widget.error(snapshot.error!, snapshot.stackTrace!)
-                  : widget.data(snapshot.data!),
-        );
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      child: switch (state) {
+        _State.loading => widget.loading(),
+        _State.error => widget.error(error!, stackTrace!),
+        _State.data => widget.data(data!),
       },
     );
   }
+}
+
+enum _State {
+  loading,
+  error,
+  data,
 }

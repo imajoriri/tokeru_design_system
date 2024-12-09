@@ -23,6 +23,7 @@ final _dio = Dio();
 
 /// URL先のOGPデータを取得する。
 Future<TokeruUrlPreview> fetchUrlPreview(Uri url) async {
+  print('fetchUrlPreview: $url');
   final response = await _dio.get(
     url.toString(),
     options: Options(

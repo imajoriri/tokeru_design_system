@@ -182,6 +182,13 @@ class TokeruTheme {
         primaryContrastingColor: colorExt.onPrimary,
         barBackgroundColor: colorExt.background,
       ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: colorExt.primary,
+        linearTrackColor: colorExt.background,
+        circularTrackColor: colorExt.background,
+        refreshBackgroundColor: colorExt.background,
+        linearMinHeight: 2,
+      ),
       extensions: [
         colorExt,
         spacing,
