@@ -185,8 +185,6 @@ class TokeruTheme {
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: colorExt.primary,
         linearTrackColor: colorExt.background,
-        circularTrackColor: colorExt.background,
-        refreshBackgroundColor: colorExt.background,
         linearMinHeight: 2,
       ),
       extensions: [

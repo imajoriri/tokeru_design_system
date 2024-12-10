@@ -91,7 +91,7 @@ class _AppIconButtonState extends State<TokeruIconButton> {
       message: widget.tooltip ?? '',
       child: SizedBox.fromSize(
         size: widget.size,
-        child: TokeruDefaultIconButtonStyle.merge(
+        child: TokeruDefaultButtonStyle.merge(
           style: TokeruButtonStyle(
             shape: RoundedRectangleBorder(
               side: widget.borderColor != null

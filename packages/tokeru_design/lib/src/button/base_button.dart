@@ -105,9 +105,9 @@ class TokeruButtonStyle {
       );
 }
 
-class TokeruDefaultIconButtonStyle extends InheritedTheme {
+class TokeruDefaultButtonStyle extends InheritedTheme {
   final TokeruButtonStyle style;
-  const TokeruDefaultIconButtonStyle({
+  const TokeruDefaultButtonStyle({
     super.key,
     required this.style,
     required super.child,
@@ -116,10 +116,10 @@ class TokeruDefaultIconButtonStyle extends InheritedTheme {
   /// 親の[TokeruDefaultIconButtonStyle]を取得する。
   ///
   /// 取得できない場合は、[TokeruButtonStyle.primary]を使用した[TokeruDefaultIconButtonStyle]を返す。
-  static TokeruDefaultIconButtonStyle of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<
-            TokeruDefaultIconButtonStyle>() ??
-        TokeruDefaultIconButtonStyle(
+  static TokeruDefaultButtonStyle of(BuildContext context) {
+    return context
+            .dependOnInheritedWidgetOfExactType<TokeruDefaultButtonStyle>() ??
+        TokeruDefaultButtonStyle(
           style: TokeruButtonStyle.defaultStyle(context),
           child: const SizedBox.shrink(),
         );
@@ -130,8 +130,8 @@ class TokeruDefaultIconButtonStyle extends InheritedTheme {
     TokeruButtonStyle? style,
   }) {
     return Builder(builder: (context) {
-      final currentStyle = TokeruDefaultIconButtonStyle.of(context).style;
-      return TokeruDefaultIconButtonStyle(
+      final currentStyle = TokeruDefaultButtonStyle.of(context).style;
+      return TokeruDefaultButtonStyle(
         style: currentStyle.merge(style),
         child: child,
       );
@@ -139,13 +139,13 @@ class TokeruDefaultIconButtonStyle extends InheritedTheme {
   }
 
   @override
-  bool updateShouldNotify(TokeruDefaultIconButtonStyle oldWidget) {
+  bool updateShouldNotify(TokeruDefaultButtonStyle oldWidget) {
     return style != oldWidget.style;
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return TokeruDefaultIconButtonStyle(
+    return TokeruDefaultButtonStyle(
       style: style,
       child: child,
     );
@@ -212,7 +212,7 @@ class _TokeruButtonState extends State<TokeruButton> {
   }
 
   Color get overlayColor {
-    final defaultStyle = TokeruDefaultIconButtonStyle.of(context).style;
+    final defaultStyle = TokeruDefaultButtonStyle.of(context).style;
     late final Color overlayColor;
     if (!enabled) {
       overlayColor = widget.style?.contentColor?.disabled ??
@@ -239,7 +239,7 @@ class _TokeruButtonState extends State<TokeruButton> {
 
   @override
   Widget build(BuildContext context) {
-    final style = TokeruDefaultIconButtonStyle.of(context).style;
+    final style = TokeruDefaultButtonStyle.of(context).style;
     final backgroundColorAnimated =
         widget.style?.backgroundColorAnimated ?? style.backgroundColorAnimated;
     final backgroundColor =
