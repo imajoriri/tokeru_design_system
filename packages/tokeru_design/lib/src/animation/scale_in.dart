@@ -54,6 +54,12 @@ class _TokeruScaleInState extends State<TokeruScaleIn>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: _scale,

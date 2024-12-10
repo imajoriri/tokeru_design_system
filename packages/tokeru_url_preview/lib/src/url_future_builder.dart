@@ -37,6 +37,8 @@ class _TokeruUrlFutureBuilderState extends State<TokeruUrlFutureBuilder> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (data != null) return;
+
       fetchUrlPreview(widget.url).then((value) {
         setState(() {
           state = _State.data;
