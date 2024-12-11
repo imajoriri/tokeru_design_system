@@ -5,7 +5,7 @@ import 'tokeru_haptics_platform_interface.dart';
 
 const double _heavy = 1;
 const double _medium = 0.6;
-const double _light = 0.3;
+const double _light = 0.4;
 
 const double _rigid = 0.8;
 const double _soft = 0.2;
