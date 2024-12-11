@@ -17,6 +17,8 @@ dependencies:
     git:
       url: git@github.com:imajoriri/smooth_corner.git
 
+  tokeru_haptics:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

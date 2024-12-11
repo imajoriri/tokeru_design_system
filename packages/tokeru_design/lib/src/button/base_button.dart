@@ -161,19 +161,19 @@ class TokeruButton extends StatefulWidget {
     super.key,
     required this.child,
     this.style,
-    this.onPressed,
-    this.onLongPress,
+    this.onTap,
+    this.onLongTap,
     this.skipTraversal = false,
-  }) : bounce = onLongPress != null;
+  }) : bounce = onLongTap != null;
 
   final Widget child;
 
   final TokeruButtonStyle? style;
 
   /// ボタンが押された時のコールバック。
-  final void Function()? onPressed;
+  final void Function()? onTap;
 
-  final void Function()? onLongPress;
+  final void Function()? onLongTap;
 
   /// Pressed状態の時にbounceするかどうか。
   ///
@@ -187,14 +187,14 @@ class TokeruButton extends StatefulWidget {
 }
 
 class _TokeruButtonState extends State<TokeruButton> {
-  bool get enabled => widget.onPressed != null;
+  bool get enabled => widget.onTap != null;
 
   bool hover = false;
   bool focus = false;
   bool pressed = false;
 
   void onInvoke() {
-    if (widget.onPressed == null) {
+    if (widget.onTap == null) {
       return;
     }
     if (!pressed) {
@@ -202,7 +202,7 @@ class _TokeruButtonState extends State<TokeruButton> {
         pressed = true;
       });
     }
-    widget.onPressed?.call();
+    widget.onTap?.call();
     if (context.mounted) {
       setState(() {
         pressed = false;
@@ -280,7 +280,7 @@ class _TokeruButtonState extends State<TokeruButton> {
           onTapCancel: () => setState(() {
             pressed = false;
           }),
-          onLongPress: widget.onLongPress,
+          onLongPress: widget.onLongTap,
           child: AnimatedScale(
             duration: bounceDuration,
             curve: Curves.easeOutExpo,

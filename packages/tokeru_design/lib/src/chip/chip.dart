@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokeru_design/tokeru_design.dart';
+import 'package:tokeru_haptics/tokeru_haptics.dart';
 
 /// Chip
 class TokeruChip extends StatelessWidget {
@@ -8,6 +9,7 @@ class TokeruChip extends StatelessWidget {
     required this.child,
     this.onTap,
     this.selected = false,
+    this.enableHaptics = true,
   });
 
   /// 子要素。
@@ -19,11 +21,21 @@ class TokeruChip extends StatelessWidget {
   /// 選択されているかどうか
   final bool selected;
 
+  /// Hapticsを有効にするかどうか。
+  final bool enableHaptics;
+
   @override
   Widget build(BuildContext context) {
     const radius = BorderRadius.all(Radius.circular(8));
     return TokeruButton(
-      onPressed: onTap,
+      onTap: onTap != null
+          ? () {
+              if (enableHaptics) {
+                TokeruHaptics.rigidMedium();
+              }
+              onTap!();
+            }
+          : null,
       style: switch (selected) {
         true => TokeruButtonStyle.primary(context).copyWith(
             shape: TokeruSmoothRectangleBorder(

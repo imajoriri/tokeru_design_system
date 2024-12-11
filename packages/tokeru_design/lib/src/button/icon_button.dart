@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tokeru_design/src/button/base_button.dart';
 import 'package:tokeru_design/src/painting/border.dart';
+import 'package:tokeru_haptics/tokeru_haptics.dart';
 
 enum TokeruIconButtonShape {
   /// 丸型
@@ -16,7 +17,7 @@ class TokeruIconButton extends StatefulWidget {
   final Widget icon;
 
   /// クリック時の処理。
-  final void Function()? onPressed;
+  final void Function()? onTap;
 
   /// ツールチップ。
   final String? tooltip;
@@ -42,15 +43,19 @@ class TokeruIconButton extends StatefulWidget {
   /// Borderの色。
   final Color? borderColor;
 
+  /// Hapticsを有効にするかどうか。
+  final bool enableHaptics;
+
   const TokeruIconButton.large({
     super.key,
     required this.icon,
     this.style,
-    this.onPressed,
+    this.onTap,
     this.tooltip,
     this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
+    this.enableHaptics = true,
   })  : iconSize = 28,
         size = const Size(56, 56),
         padding = const EdgeInsets.all(8);
@@ -59,11 +64,12 @@ class TokeruIconButton extends StatefulWidget {
     super.key,
     required this.icon,
     this.style,
-    this.onPressed,
+    this.onTap,
     this.tooltip,
     this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
+    this.enableHaptics = true,
   })  : iconSize = 20,
         size = const Size(44, 44),
         padding = const EdgeInsets.all(8);
@@ -72,11 +78,12 @@ class TokeruIconButton extends StatefulWidget {
     super.key,
     required this.icon,
     this.style,
-    this.onPressed,
+    this.onTap,
     this.tooltip,
     this.borderColor,
     this.iconColor,
     this.shape = TokeruIconButtonShape.square,
+    this.enableHaptics = true,
   })  : iconSize = 20,
         size = const Size(32, 32),
         padding = const EdgeInsets.all(4);
@@ -106,7 +113,14 @@ class _AppIconButtonState extends State<TokeruIconButton> {
             ),
           ),
           child: TokeruButton(
-            onPressed: widget.onPressed,
+            onTap: widget.onTap != null
+                ? () {
+                    if (widget.enableHaptics) {
+                      TokeruHaptics.rigidMedium();
+                    }
+                    widget.onTap!();
+                  }
+                : null,
             style: widget.style,
             child: Container(
               padding: widget.padding,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tokeru_design/tokeru_design.dart';
+import 'package:tokeru_haptics/tokeru_haptics.dart';
 
 enum TokeruTextButtonSize {
   small,
@@ -10,25 +11,27 @@ enum TokeruTextButtonSize {
 class TokeruTextButton extends StatelessWidget {
   const TokeruTextButton.medium({
     super.key,
-    required this.onPressed,
     required this.text,
+    this.onTap,
     this.skipTraversal = false,
     this.style,
     this.icon,
+    this.enableHaptics = true,
   })  : iconSize = 16,
         type = TokeruTextButtonSize.medium;
 
   const TokeruTextButton.small({
     super.key,
-    required this.onPressed,
     required this.text,
+    this.onTap,
     this.skipTraversal = false,
     this.style,
     this.icon,
+    this.enableHaptics = true,
   })  : iconSize = 16,
         type = TokeruTextButtonSize.small;
 
-  final void Function()? onPressed;
+  final void Function()? onTap;
 
   final Widget text;
 
@@ -44,6 +47,9 @@ class TokeruTextButton extends StatelessWidget {
 
   /// ボタンのスタイル。
   final TokeruButtonStyle? style;
+
+  /// Hapticsを有効にするかどうか。
+  final bool enableHaptics;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +71,14 @@ class TokeruTextButton extends StatelessWidget {
       child: TokeruDefaultButtonStyle.merge(
         style: TokeruButtonStyle(shape: shape),
         child: TokeruButton(
-          onPressed: onPressed,
+          onTap: onTap != null
+              ? () {
+                  if (enableHaptics) {
+                    TokeruHaptics.rigidMedium();
+                  }
+                  onTap!();
+                }
+              : null,
           skipTraversal: skipTraversal,
           style: style,
           child: Padding(
