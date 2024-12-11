@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 abstract class TokeruPrimitiveColors {
+  static const white = Color(0xFFFFFFFF);
+
   static const grey = MaterialColor(
     _greyPrimaryValue,
     <int, Color>{
-      50: Color(0xFFFAFAFA),
-      100: Color(0xFFF5F5F5),
+      50: Color(0xFFF5F5F5),
+      100: Color(0xFFE5E5E5),
       200: Color(0xFFD9D9D9),
       300: Color(0xFFB2B2B2),
       400: Color(0xFF757575),

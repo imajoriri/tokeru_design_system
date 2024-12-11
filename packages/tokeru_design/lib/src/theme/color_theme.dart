@@ -5,15 +5,20 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     // Primary
     required this.primary,
     required this.onPrimary,
+    required this.onPrimarySubtle,
+    required this.primaryOutline,
 
     // Secondary
     required this.secondary,
     required this.onSecondary,
+    required this.onSecondarySubtle,
+    required this.secondaryOutline,
 
     // surface
     required this.surface,
     required this.onSurface,
     required this.onSurfaceSubtle,
+    required this.surfaceOutline,
 
     // outline
     required this.outline,
@@ -38,15 +43,20 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
   // Primary
   final Color primary;
   final Color onPrimary;
+  final Color onPrimarySubtle;
+  final Color primaryOutline;
 
   // Secondary
   final Color secondary;
   final Color onSecondary;
+  final Color onSecondarySubtle;
+  final Color secondaryOutline;
 
   // surface
   final Color surface;
   final Color onSurface;
   final Color onSurfaceSubtle;
+  final Color surfaceOutline;
 
   // outline
   final Color outline;
@@ -76,15 +86,20 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     // Primary
     Color? primary,
     Color? onPrimary,
+    Color? onPrimarySubtle,
+    Color? primaryOutline,
 
     // Secondary
     Color? secondary,
     Color? onSecondary,
+    Color? onSecondarySubtle,
+    Color? secondaryOutline,
 
     // surface
     Color? surface,
     Color? onSurface,
     Color? onSurfaceSubtle,
+    Color? surfaceOutline,
 
     // outline
     Color? outline,
@@ -108,11 +123,16 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     return TokeruColorsExtension(
       primary: primary ?? this.primary,
       onPrimary: onPrimary ?? this.onPrimary,
+      onPrimarySubtle: onPrimarySubtle ?? this.onPrimarySubtle,
+      primaryOutline: primaryOutline ?? this.primaryOutline,
       secondary: secondary ?? this.secondary,
       onSecondary: onSecondary ?? this.onSecondary,
+      onSecondarySubtle: onSecondarySubtle ?? this.onSecondarySubtle,
+      secondaryOutline: secondaryOutline ?? this.secondaryOutline,
       surface: surface ?? this.surface,
       onSurface: onSurface ?? this.onSurface,
       onSurfaceSubtle: onSurfaceSubtle ?? this.onSurfaceSubtle,
+      surfaceOutline: surfaceOutline ?? this.surfaceOutline,
       outline: outline ?? this.outline,
       outlineSubtle: outlineSubtle ?? this.outlineSubtle,
       outlineStrong: outlineStrong ?? this.outlineStrong,

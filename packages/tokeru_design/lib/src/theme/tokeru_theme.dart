@@ -104,22 +104,44 @@ class TokeruTheme {
 
   static final color = () {
     return TokeruColorsExtension(
+      // primary
       primary: Colors.cyan.shade500,
-      onPrimary: Colors.white,
-      secondary: TokeruPrimitiveColors.grey.shade200,
-      onSecondary: TokeruPrimitiveColors.grey.shade400,
-      surface: Colors.white,
-      onSurface: Colors.grey.shade900,
-      onSurfaceSubtle: Colors.grey.shade600,
-      outline: Colors.grey.shade300,
-      outlineSubtle: Colors.grey.shade200,
-      outlineStrong: Colors.grey.shade400,
+      onPrimary: TokeruPrimitiveColors.white,
+      onPrimarySubtle: TokeruPrimitiveColors.grey.shade50,
+      primaryOutline: TokeruPrimitiveColors.white,
+
+      // secondary
+      secondary: TokeruPrimitiveColors.grey.shade50,
+      onSecondary: TokeruPrimitiveColors.grey.shade900,
+      onSecondarySubtle: TokeruPrimitiveColors.grey.shade400,
+      secondaryOutline: TokeruPrimitiveColors.grey.shade100,
+
+      // surface
+      surface: TokeruPrimitiveColors.white,
+      onSurface: TokeruPrimitiveColors.grey.shade900,
+      onSurfaceSubtle: TokeruPrimitiveColors.grey.shade400,
+      surfaceOutline: TokeruPrimitiveColors.grey.shade100,
+
+      // outline
+      outline: TokeruPrimitiveColors.grey.shade300,
+      outlineSubtle: TokeruPrimitiveColors.grey.shade200,
+      outlineStrong: TokeruPrimitiveColors.grey.shade400,
+
+      // link
       link: Colors.blue.shade800,
-      skeleton: Colors.grey.shade300,
-      background: TokeruPrimitiveColors.grey.shade100,
+
+      // skeleton
+      skeleton: Colors.grey.shade100,
+
+      // background
+      background: TokeruPrimitiveColors.grey.shade50,
       onBackground: Colors.grey.shade900,
+
+      // error
       error: TokeruPrimitiveColors.red.shade500,
       onError: Colors.white,
+
+      // success
       success: TokeruPrimitiveColors.green.shade500,
       onSuccess: Colors.white,
     );

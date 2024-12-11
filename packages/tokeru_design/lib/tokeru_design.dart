@@ -7,6 +7,8 @@ export 'src/animation/duration.dart';
 export 'src/button/base_button.dart';
 export 'src/button/icon_button.dart';
 export 'src/button/text_button.dart';
+// chip
+export 'src/chip/chip.dart';
 // theme
 export 'src/theme/tokeru_theme.dart';
 // painting

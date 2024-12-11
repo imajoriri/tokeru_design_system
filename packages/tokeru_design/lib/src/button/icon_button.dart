@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokeru_design/src/button/base_button.dart';
+import 'package:tokeru_design/src/painting/border.dart';
 
 enum TokeruIconButtonShape {
   /// 丸型
@@ -93,11 +94,9 @@ class _AppIconButtonState extends State<TokeruIconButton> {
         size: widget.size,
         child: TokeruDefaultButtonStyle.merge(
           style: TokeruButtonStyle(
-            shape: RoundedRectangleBorder(
+            shape: TokeruSmoothRectangleBorder(
               side: widget.borderColor != null
-                  ? BorderSide(
-                      color: widget.borderColor!,
-                    )
+                  ? BorderSide(color: widget.borderColor!)
                   : BorderSide.none,
               borderRadius: BorderRadius.all(
                 Radius.circular(
