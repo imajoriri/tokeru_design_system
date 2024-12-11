@@ -17,7 +17,9 @@ dependencies:
     git:
       url: git@github.com:imajoriri/smooth_corner.git
 
+  # tokeru_design自体をpathで参照する場合にtokeru_hapticsを参照する必要があるため、pathで参照する。
   tokeru_haptics:
+    path: ../tokeru_haptics
 
 dev_dependencies:
   flutter_test:
