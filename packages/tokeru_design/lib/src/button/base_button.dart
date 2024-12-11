@@ -3,16 +3,16 @@ import 'package:tokeru_design/tokeru_design.dart';
 
 extension _ButtonStatusColor on Color {
   /// ホバー時のカラーを返すメソッド。
-  Color get hovered => withOpacity(0.08);
+  Color get hovered => withValues(alpha: 0.08);
 
   /// フォーカス時のカラーを返すメソッド。
-  Color get focused => withOpacity(0.10);
+  Color get focused => withValues(alpha: 0.10);
 
   /// プレス時のカラーを返すメソッド。
-  Color get pressed => withOpacity(0.10);
+  Color get pressed => withValues(alpha: 0.10);
 
   /// Disabledのカラーを返すメソッド。
-  Color get disabled => withOpacity(0.38);
+  Color get disabled => withValues(alpha: 0.38);
 }
 
 class TokeruButtonStyle {
@@ -231,8 +231,8 @@ class _TokeruButtonState extends State<TokeruButton> {
           defaultStyle.contentColor?.focused ??
           Colors.transparent;
     } else {
-      overlayColor =
-          widget.style?.backgroundColor?.withOpacity(0) ?? Colors.transparent;
+      overlayColor = widget.style?.backgroundColor?.withValues(alpha: 0) ??
+          Colors.transparent;
     }
     return overlayColor;
   }

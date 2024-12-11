@@ -2,6 +2,7 @@ name: tokeru_design
 description: "A new Flutter package project."
 version: 0.0.1
 homepage:
+publish_to: none
 
 environment:
   sdk: ^3.5.3
@@ -11,7 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smooth_corner: ^1.1.0
+  # smooth_corner: ^1.1.0
+  smooth_corner:
+    git:
+      url: git@github.com:imajoriri/smooth_corner.git
 
 dev_dependencies:
   flutter_test:
