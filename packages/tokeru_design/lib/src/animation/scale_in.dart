@@ -49,7 +49,9 @@ class _TokeruScaleInState extends State<TokeruScaleIn>
         1,
         0,
       );
-      _controller.animateWith(springSimulation);
+      if (mounted) {
+        _controller.animateWith(springSimulation);
+      }
     });
   }
 
