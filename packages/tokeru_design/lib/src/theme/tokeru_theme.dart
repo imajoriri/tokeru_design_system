@@ -138,8 +138,8 @@ class TokeruTheme {
       onBackground: Colors.grey.shade900,
 
       // error
-      error: TokeruPrimitiveColors.red.shade500,
-      onError: Colors.white,
+      error: TokeruPrimitiveColors.red.shade50,
+      onError: TokeruPrimitiveColors.red.shade500,
 
       // success
       success: TokeruPrimitiveColors.green.shade500,
@@ -193,7 +193,10 @@ class TokeruTheme {
     return defaultTheme.copyWith(
       dividerColor: colorExt.outline,
       textTheme: defaultTheme.textTheme.copyWith(
-        bodyLarge: const TextStyle(fontFamily: 'Hiragino Kaku Gothic ProN'),
+        bodyLarge: TextStyle(
+          fontFamily: 'Hiragino Kaku Gothic ProN',
+          color: colorExt.onSurface,
+        ),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: colorExt.surface,
@@ -208,6 +211,15 @@ class TokeruTheme {
         color: colorExt.primary,
         linearTrackColor: colorExt.background,
         linearMinHeight: 2,
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: colorExt.onSurface,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+        hintStyle: text.bodyMedium.copyWith(
+          color: colorExt.onSurfaceSubtle,
+        ),
       ),
       extensions: [
         colorExt,

@@ -90,18 +90,35 @@ class TokeruButtonStyle {
         backgroundColor: context.tokeruColors.primary,
       );
 
-  /// 背景色が透明のボタンのスタイル。
+  /// セカンダリーカラーのボタンスタイル。
+  static TokeruButtonStyle secondary(BuildContext context) => TokeruButtonStyle(
+        contentColor: context.tokeruColors.onSecondary,
+        backgroundColor: context.tokeruColors.secondary,
+      );
+
+  /// サーフェスカラーのボタンスタイル。
+  static TokeruButtonStyle surface(BuildContext context) => TokeruButtonStyle(
+        contentColor: context.tokeruColors.onSurface,
+        backgroundColor: context.tokeruColors.surface,
+      );
+
+  /// サーフェスカラーの上に置くボタンのスタイル。
   static TokeruButtonStyle transparentSurface(BuildContext context) =>
       TokeruButtonStyle(
         contentColor: context.tokeruColors.onSurface,
         backgroundColor: context.tokeruColors.surface,
       );
 
-  /// 背景色が透明のボタンのスタイル。
+  /// バックグラウンドのカラーの上に置くボタンのスタイル。
   static TokeruButtonStyle transparentBackground(BuildContext context) =>
       TokeruButtonStyle(
         contentColor: context.tokeruColors.onBackground,
         backgroundColor: context.tokeruColors.background,
+      );
+
+  static TokeruButtonStyle error(BuildContext context) => TokeruButtonStyle(
+        contentColor: context.tokeruColors.onError,
+        backgroundColor: context.tokeruColors.error,
       );
 }
 
@@ -283,7 +300,7 @@ class _TokeruButtonState extends State<TokeruButton> {
           onLongPress: widget.onLongTap,
           child: AnimatedScale(
             duration: bounceDuration,
-            curve: Curves.easeOutExpo,
+            curve: TokeruCurves.easeOutDefault,
             scale: pressed && enabled && widget.bounce ? 0.95 : 1.0,
             child: Stack(
               children: [
