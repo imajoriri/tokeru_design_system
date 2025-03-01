@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tokeru_design/tokeru_design.dart';
 import 'package:tokeru_haptics/tokeru_haptics.dart';
 
@@ -13,18 +14,16 @@ class TokeruTextButton extends StatelessWidget {
   const TokeruTextButton({
     super.key,
     required this.type,
-    this.text,
+    required this.child,
     this.onTap,
     this.skipTraversal = false,
     this.style,
-    this.icon,
     this.enableHaptics = true,
   });
 
   const TokeruTextButton.large({
     super.key,
-    this.text,
-    this.icon,
+    required this.child,
     this.onTap,
     this.skipTraversal = false,
     this.style,
@@ -33,8 +32,7 @@ class TokeruTextButton extends StatelessWidget {
 
   const TokeruTextButton.medium({
     super.key,
-    this.text,
-    this.icon,
+    required this.child,
     this.onTap,
     this.skipTraversal = false,
     this.style,
@@ -43,8 +41,7 @@ class TokeruTextButton extends StatelessWidget {
 
   const TokeruTextButton.small({
     super.key,
-    this.text,
-    this.icon,
+    required this.child,
     this.onTap,
     this.skipTraversal = false,
     this.style,
@@ -53,10 +50,8 @@ class TokeruTextButton extends StatelessWidget {
 
   final void Function()? onTap;
 
-  final Widget? text;
-
-  /// アイコン。
-  final Widget? icon;
+  /// Text or Icon.
+  final Widget child;
 
   final bool skipTraversal;
 
@@ -68,19 +63,11 @@ class TokeruTextButton extends StatelessWidget {
   /// Hapticsを有効にするかどうか。
   final bool enableHaptics;
 
-  double get height => switch (type) {
+  double get size => switch (type) {
         TokeruTextButtonSize.small => 32,
         TokeruTextButtonSize.medium => 44,
         TokeruTextButtonSize.large => 56,
       };
-
-  /// ボタンの幅。
-  ///
-  /// アイコンのみの場合はheightと同じ値を返すことで正方形にする。
-  double? get width {
-    if (text == null && icon != null) return height;
-    return null;
-  }
 
   double get iconSize => switch (type) {
         TokeruTextButtonSize.small => 16.0,
@@ -97,9 +84,9 @@ class TokeruTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = switch (type) {
-      TokeruTextButtonSize.small => context.tokeruTextTheme.labelSmall,
-      TokeruTextButtonSize.medium => context.tokeruTextTheme.labelMidium,
-      TokeruTextButtonSize.large => context.tokeruTextTheme.labelLarge,
+      TokeruTextButtonSize.small => context.tokeruTextTheme.labelMidium,
+      TokeruTextButtonSize.medium => context.tokeruTextTheme.labelLarge,
+      TokeruTextButtonSize.large => context.tokeruTextTheme.bodyLarge,
     };
 
     return TokeruDefaultButtonStyle.merge(
@@ -119,29 +106,23 @@ class TokeruTextButton extends StatelessWidget {
           duration: tokeruDurationNormal,
           curve: TokeruCurves.easeOutDefault,
           child: Container(
-            height: height,
-            width: width,
+            constraints: BoxConstraints(minWidth: size, minHeight: size),
             padding: switch (type) {
               TokeruTextButtonSize.small =>
-                EdgeInsets.symmetric(horizontal: context.tokeruSpacing.small),
+                EdgeInsets.symmetric(horizontal: context.tokeruSpacing.medium),
               TokeruTextButtonSize.medium =>
-                EdgeInsets.symmetric(horizontal: context.tokeruSpacing.small),
+                EdgeInsets.symmetric(horizontal: context.tokeruSpacing.medium),
               TokeruTextButtonSize.large =>
                 EdgeInsets.symmetric(horizontal: context.tokeruSpacing.medium),
             },
+            alignment: Alignment.center,
             child: DefaultTextStyle.merge(
               style: textStyle,
               child: IconTheme.merge(
                 data: IconThemeData(size: iconSize),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (icon != null) icon!,
-                    if (text != null && icon != null)
-                      SizedBox(width: context.tokeruSpacing.smallX),
-                    if (text != null) text!,
-                  ],
+                child: SizedBox(
+                  width: double.infinity,
+                  child: child,
                 ),
               ),
             ),

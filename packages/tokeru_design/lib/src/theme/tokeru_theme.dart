@@ -136,6 +136,7 @@ class TokeruTheme {
       // background
       background: TokeruPrimitiveColors.grey.shade50,
       onBackground: Colors.grey.shade900,
+      onBackgroundSubtle: TokeruPrimitiveColors.grey.shade400,
 
       // error
       error: TokeruPrimitiveColors.red.shade50,
@@ -170,18 +171,9 @@ class TokeruTheme {
       bodyLarge: TextStyle(fontSize: 16),
       bodyMedium: TextStyle(fontSize: 14),
       bodySmall: TextStyle(fontSize: 12),
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-      ),
-      labelMidium: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-      ),
-      labelSmall: TextStyle(
-        fontSize: 11,
-        fontWeight: FontWeight.bold,
-      ),
+      labelLarge: TextStyle(fontSize: 14),
+      labelMidium: TextStyle(fontSize: 12),
+      labelSmall: TextStyle(fontSize: 11),
     );
   }();
 

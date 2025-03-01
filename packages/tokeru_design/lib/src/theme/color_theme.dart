@@ -25,11 +25,14 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     required this.outlineSubtle,
     required this.outlineStrong,
 
+    // background
+    required this.background,
+    required this.onBackground,
+    required this.onBackgroundSubtle,
+
     // others
     required this.link,
     required this.skeleton,
-    required this.background,
-    required this.onBackground,
 
     // error
     required this.error,
@@ -67,12 +70,10 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
   final Color link;
   final Color skeleton;
 
-  /// 背景色
+  /// background
   final Color background;
-
-  /// 背景色のテキストカラー
   final Color onBackground;
-
+  final Color onBackgroundSubtle;
   // error
   final Color error;
   final Color onError;
@@ -106,11 +107,14 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
     Color? outlineSubtle,
     Color? outlineStrong,
 
+    // background
+    Color? background,
+    Color? onBackground,
+    Color? onBackgroundSubtle,
+
     // others
     Color? link,
     Color? skeleton,
-    Color? background,
-    Color? onBackground,
 
     // error
     Color? error,
@@ -140,6 +144,7 @@ class TokeruColorsExtension extends ThemeExtension<TokeruColorsExtension> {
       skeleton: skeleton ?? this.skeleton,
       background: background ?? this.background,
       onBackground: onBackground ?? this.onBackground,
+      onBackgroundSubtle: onBackgroundSubtle ?? this.onBackgroundSubtle,
       error: error ?? this.error,
       onError: onError ?? this.onError,
       success: success ?? this.success,
